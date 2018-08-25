@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="https://bootswatch.com/4/united/bootstrap.min.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+  <link rel="stylesheet" href="style.css">
+  <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+
+  <title>Fast Pizza</title>
+</head>
+
+<body>
+  <header>
+    <div class="imgheader">
+      <h1>Pizza Order 2 hours</h1>
+    </div>
+    <div class="navi">
+      <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-primary">
+        <a class="navbar-brand" href="#">Fast Pizza</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+        <div class="collapse navbar-collapse" id="navbarColor01">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="index.html">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="order/order.php">Order</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Contact</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">About</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Comment</a>
+            </li>
+          </ul>
+          <form class="form-inline my-2 my-lg-0">
+            <input class="form-control mr-sm-2" type="text" placeholder="Search">
+            <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
+          </form>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <div class="container">
+    <div class="slide">
+      <div class="slideImg">
+        <div class="left arrow" id="arrow_left">
+          <i class="fas fa-chevron-left" style="font-size:50px;color:#fff;"></i>
+        </div>
+        <div class="right arrow" id="arrow_right">
+          <i class="fas fa-chevron-right" style="font-size:50px;color:#fff;"></i>
+        </div>
+        <img src="https://www.pizzahut.vn/files/banner/BOGOBannerHome.jpg" id="img0" class="postImg" alt="pizza">
+        <img src="https://www.pizzahut.vn/files/banner/OLO_Banner_BIGORDER_1600x467.jpg" id="img1" class="postImg" alt="pizza">
+        <img src="https://www.pizzahut.vn/files/banner/OLO_Banner_1600x467.jpg" id="img2" class="postImg" alt="pizza">
+      </div>
+      <div class="dots">
+        <span class="dot" id="dot0"></span>
+        <span class="dot" id="dot1"></span>
+        <span class="dot" id="dot2"></span>
+      </div>
+    </div>
+
+    <div class="cards">
+
+
+      <div class="card mb-3">
+        <h3 class="card-header bg-primary">Good Services</h3>
+        <div class="card-body">
+          <h5 class="card-title">Quality Pizza</h5>
+          <h6 class="card-subtitle text-muted">From the best chef</h6>
+        </div>
+        <img style="height: 200px; width: 100%; display: block;" src="imgs/pic1.jpeg">
+        <div class="card-body">
+          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+        </div>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">Cras justo odio</li>
+          <li class="list-group-item">Dapibus ac facilisis in</li>
+          <li class="list-group-item">Vestibulum at eros</li>
+        </ul>
+        <div class="card-body">
+          <a href="#" class="card-link">Card link</a>
+          <a href="#" class="card-link">Another link</a>
+        </div>
+        <div class="card-footer text-muted">
+          2 days ago
+        </div>
+      </div>
+
+
+
+      <div class="card mb-3">
+        <h3 class="card-header bg-primary">Card header</h3>
+        <div class="card-body">
+          <h5 class="card-title">Special title treatment</h5>
+          <h6 class="card-subtitle text-muted">Support card subtitle</h6>
+        </div>
+        <img style="height: 200px; width: 100%; display: block;" src="imgs/pic2.jpg">
+        <div class="card-body">
+          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+        </div>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">Cras justo odio</li>
+          <li class="list-group-item">Dapibus ac facilisis in</li>
+          <li class="list-group-item">Vestibulum at eros</li>
+        </ul>
+        <div class="card-body">
+          <a href="#" class="card-link">Card link</a>
+          <a href="#" class="card-link">Another link</a>
+        </div>
+        <div class="card-footer text-muted">
+          2 days ago
+        </div>
+      </div>
+
+
+
+    </div>
+
+
+
+
+  </div>
+
+
+  <!-- Footer -->
+<footer class="page-footer font-small blue bg-primary">
+
+  <!-- Copyright -->
+  <div class="footer-copyright text-center py-3">© 2018 Copyright:
+    <a href="https://mdbootstrap.com/bootstrap-tutorial/" style="color:#fff;"> FastPizza.com</a>
+  </div>
+  <!-- Copyright -->
+
+</footer>
+<!-- Footer -->
+
+
+  <!--self js-->
+  <script type="text/javascript" src="main.js">
+  </script>
+  <!--link for bootswatch-->
+
+
+
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+</body>
+
+</html>
