@@ -1,4 +1,8 @@
 
+
+
+
+
 <?php
 session_start();
 function nameDrink($name){
@@ -26,6 +30,57 @@ $customRadio = $_SESSION['customRadio'];
 $drink = nameDrink($_SESSION['drink']);
 $price = $_SESSION['price'];
 ?>
+
+
+
+
+<?php
+//check for the submit
+//messageg var
+$msg = '';
+$msgClass = '';
+if(filter_has_var(INPUT_POST,'submit')){
+  //get form data
+  $name = htmlspecialchars($_POST['name']);
+  $email = htmlspecialchars($_POST['email']);
+  $message = htmlspecialchars($_POST['message']);
+  $address = htmlspecialchars($_POST['address']);
+  $orderType = htmlspecialchars($_POST['orderType']);
+  $unitprice = $price;
+  $idprod = $_GET['q'];
+  $products = htmlspecialchars($_POST['order']);
+  $message .= "--".$products."--";
+  //check required Feilds
+  if(!empty($email) && !empty($name) && !empty($address)){
+    //passed
+    //check email
+    if(filter_var($email,FILTER_VALIDATE_EMAIL) === false){
+      //failed
+      $msg = 'Please fill a valid email';
+      $msgClass = 'alert-danger';
+    }else {
+      //do when evarythings good
+      $connIn = mysqli_connect('localhost','root','123456','pizzaprod');
+      //check connect
+      if(mysqli_connect_errno()){
+        echo 'Failed to conect to MySql '.mysqli_connect_errno();
+      }
+      $queryInsert = "INSERT INTO orders(idprod,name,email,address,message,ordertype,done,unitPrice) VALUES('$idprod','$name','$email','$address','$message','$orderType',0,'$unitprice')";
+      if(mysqli_query($connIn,$queryInsert)){
+        header('Location: thank.php?name='.$name);
+      }else{
+        echo 'error'.mysqli_error($connIn);
+      }
+
+    }
+  }else{
+    $msg = 'Please fill in all the feilds';
+    $msgClass = 'alert-danger';
+  }
+}
+?>
+
+
 
 <?php
 //connect databasae
@@ -59,8 +114,13 @@ mysqli_close($conn);
 
 <?php include('header.php');?>
 <div class="container">
+  <?php if($msg != ''):?>
+    <div class="alert <?php echo $msgClass;?>">
+      <?php echo $msg;?>
+    </div>
+  <?php endif;?>
 
-  <form>
+  <form action="<?php echo $_SERVER['PHP_SELF']."?q=".$_GET['q'];?>" method="post">
   <fieldset>
     <legend>Complete Order</legend>
     <div class="form-group row">
@@ -88,13 +148,12 @@ mysqli_close($conn);
 
     <div class="form-group">
       <label for="exampleInputEmail1">Product</label>
-      <input name="order" disabled type="text" class="form-control" id="address" value="<?php echo $post['name']." ,drink: ".$drink." ,Combo: ".$customRadio; ?>">
-
+      <input name="order" type="text" class="form-control" id="address" value="<?php echo $post['name']." ,drink: ".$drink." ,Combo: ".$customRadio; ?>">
     </div>
 
     <div class="form-group">
       <label for="exampleTextarea">Some note for Your Order</label>
-      <textarea name="note" class="form-control" id="exampleTextarea" rows="3"></textarea>
+      <textarea name="message" class="form-control" id="exampleTextarea" rows="3"></textarea>
     </div>
 
 
@@ -120,7 +179,7 @@ mysqli_close($conn);
             <div class="input-group-prepend">
               <span class="input-group-text">$</span>
             </div>
-            <input id="price" type="text" class="form-control" aria-label="Amount (to the nearest dollar)" value="<?php echo $price;?>" disabled >
+            <input name="price" id="price" type="text" class="form-control" aria-label="Amount (to the nearest dollar)" value="<?php echo $price;?>" disabled >
             <div class="input-group-append">
               <span class="input-group-text">.00</span>
             </div>
