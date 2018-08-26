@@ -1,5 +1,6 @@
-<?php
 
+<?php
+//connect databasae
 //create connect
 $conn = mysqli_connect('localhost','root','123456','pizzaprod');
 //check connect
@@ -26,7 +27,27 @@ mysqli_free_result($result1);
 //close connection
 mysqli_close($conn);
 
+
+
+
 ?>
+
+<?php
+// set session
+if(isset($_POST['submit'])){
+  session_start();
+  $_SESSION['customRadio'] = htmlentities($_POST['customRadio']);
+  $_SESSION['drink'] = htmlentities($_POST['drink']);
+  $_SESSION['price'] = htmlentities($_POST['price']);
+  $q = $_GET['q'];
+  $URL = "Location: completeOrder/complete.php?q=".$q;
+  header($URL);
+
+}
+
+?>
+
+
 
 
 <?php include('header.php');?>
@@ -51,9 +72,10 @@ mysqli_close($conn);
 
 
 
-<form class="" action="index.html" method="post">
+<form action="<?php echo $_SERVER['PHP_SELF']."?q=".$_GET['q'];?>" method="post">
     <fieldset>
       <legend>Custom forms</legend>
+
       <div class="form-group">
         <div class="custom-control custom-radio">
           <input type="radio" id="customRadio0" name="customRadio" class="custom-control-input" value="1" checked>
@@ -74,12 +96,11 @@ mysqli_close($conn);
       </div>
 
       <div class="form-group">
-        <select class="custom-select" id="drink">
-          <option selected="" value="0">Select Drink</option>
-          <option value="8">Cocacola</option>
-          <option value="9">Pepsi</option>
-          <option value="10">Fanta</option>
-          <option value="0">No Drink</option>
+        <select class="custom-select" id="drink" name="drink">
+          <option selected="" value="0">No Drink</option>
+          <option value="1">Cocacola</option>
+          <option value="2">Pepsi</option>
+          <option value="3">Fanta</option>
         </select>
       </div>
 
@@ -91,7 +112,7 @@ mysqli_close($conn);
             <div class="input-group-prepend">
               <span class="input-group-text">$</span>
             </div>
-            <input id="price" type="text" class="form-control" aria-label="Amount (to the nearest dollar)" value="<?php echo $price['price'];?>">
+            <input id="price" name="price" type="text" class="form-control" aria-label="Amount (to the nearest dollar)" value="<?php echo $price['price'];?>">
             <div class="input-group-append">
               <span class="input-group-text">.00</span>
             </div>
@@ -102,7 +123,7 @@ mysqli_close($conn);
 
     </fieldset>
 
-      <button type="submit" class="btn btn-primary btn-lg btn-block">Order Now</button>
+      <button type="submit" class="btn btn-primary btn-lg btn-block" name="submit">Order Now</button>
     </form>
 
 
@@ -115,13 +136,51 @@ mysqli_close($conn);
 var defaultPrice = $('#price').val();
 var finalPrice = defaultPrice;
 //alert($('input[name=customRadio]:checked').val());
+var priceDrink = 0;
 $('input[name=customRadio]').change(()=>{
-  finalPrice = defaultPrice*$('input[name=customRadio]:checked').val() + Number($('#drink').val());
+  switch ($('#drink').val()) {
+    case "0":{
+      priceDrink = 0;
+      break;
+    }
+    case "1":{
+      priceDrink = 8;
+      break;}
+    case "2":{
+      priceDrink = 10;
+      break;
+    }
+    case "3":{
+      priceDrink = 12;
+      break;
+    }
+
+
+  }
+  finalPrice = defaultPrice*$('input[name=customRadio]:checked').val() + priceDrink;
   $('#price').val(finalPrice);
 
 });
 $('#drink').change(()=>{
-  finalPrice = defaultPrice*$('input[name=customRadio]:checked').val() + Number($('#drink').val());
+  switch ($('#drink').val()) {
+    case "0":{
+      priceDrink = 0;
+      break;
+    }
+    case "1":{
+      priceDrink = 8;
+      break;}
+    case "2":{
+      priceDrink = 10;
+      break;
+    }
+    case "3":{
+      priceDrink = 12;
+      break;
+    }
+
+  }
+  finalPrice = defaultPrice*$('input[name=customRadio]:checked').val() + priceDrink;
   $('#price').val(finalPrice);
 });
 
