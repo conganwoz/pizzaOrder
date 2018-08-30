@@ -3,4 +3,6 @@ id name Origin img chef describle
 
 order checkorder
 user info order
-id idpro name email addr message orderType done
+id idpro name email phone num addr message orderType done
+manager
+id name address phonenum email namelogin passw 

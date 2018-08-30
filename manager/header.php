@@ -28,13 +28,16 @@
         <div class="collapse navbar-collapse" id="navbarColor01">
           <ul class="navbar-nav mr-auto">
             <li class="nav-item">
-              <a class="nav-link" href="../../index.html">Home <span class="sr-only">(current)</span></a>
+              <a class="nav-link" href="../index.html">Home <span class="sr-only">(current)</span></a>
             </li>
-            <li class="nav-item active">
-              <a class="nav-link" href="../order.php">Order</a>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Order</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="#">Contact</a>
+            </li>
+            <li class="nav-item active">
+              <a class="nav-link" href="#">For Manager</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="#">About</a>

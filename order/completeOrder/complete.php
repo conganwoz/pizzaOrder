@@ -50,8 +50,9 @@ if(filter_has_var(INPUT_POST,'submit')){
   $idprod = $_GET['q'];
   $products = htmlspecialchars($_POST['order']);
   $message .= "--".$products."--";
+  $phone = htmlspecialchars($_POST['phone']);
   //check required Feilds
-  if(!empty($email) && !empty($name) && !empty($address)){
+  if(!empty($email) && !empty($name) && !empty($address) && !empty($phone)){
     //passed
     //check email
     if(filter_var($email,FILTER_VALIDATE_EMAIL) === false){
@@ -65,7 +66,7 @@ if(filter_has_var(INPUT_POST,'submit')){
       if(mysqli_connect_errno()){
         echo 'Failed to conect to MySql '.mysqli_connect_errno();
       }
-      $queryInsert = "INSERT INTO orders(idprod,name,email,address,message,ordertype,done,unitPrice) VALUES('$idprod','$name','$email','$address','$message','$orderType',0,'$unitprice')";
+      $queryInsert = "INSERT INTO orders(idprod,name,email,phonenum,address,message,ordertype,done,unitPrice) VALUES('$idprod','$name','$email','$phone','$address','$message','$orderType',0,'$unitprice')";
       if(mysqli_query($connIn,$queryInsert)){
         header('Location: thank.php?name='.$name);
       }else{
@@ -135,6 +136,10 @@ mysqli_close($conn);
       <input name="name" type="text" class="form-control" id="address" placeholder="Your Name">
     </div>
     <div class="form-group">
+      <label for="exampleInputEmail1">Phone number</label>
+      <input name="phone" type="text" class="form-control" id="address" placeholder="Your Phone number">
+    </div>
+    <div class="form-group">
       <label for="exampleInputEmail1">Email address</label>
       <input name="email" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
       <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
@@ -161,13 +166,13 @@ mysqli_close($conn);
       <legend>Order's type</legend>
       <div class="form-check">
         <label class="form-check-label">
-          <input class="form-check-input" type="radio" name="orderType" value="1" checked="">
+          <input class="form-check-input" type="radio" name="orderType" value="1" >
           Vip
         </label>
       </div>
       <div class="form-check disabled">
         <label class="form-check-label">
-          <input class="form-check-input" type="radio" name="orderType" value="0">
+          <input class="form-check-input" type="radio" name="orderType" value="0" checked="">
           Normal
         </label>
       </div>
@@ -196,5 +201,12 @@ mysqli_close($conn);
 </form>
 
 </div>
+<script type="text/javascript">
+  var defaultPrice = Number($('input[name="price"]').val());
+  $('input[name="orderType"]').change(()=>{
+    var newPrice = defaultPrice + 10*Number($('input[name="orderType"]:checked').val());
+    $('input[name="price"]').val(newPrice);
+  });
+</script>
 
 <?php include('footer.php');?>
