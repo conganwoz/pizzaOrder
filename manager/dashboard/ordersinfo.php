@@ -5,8 +5,7 @@ $password = $_SESSION['password'];
 if(empty($name)||empty($password)){
   header('Location: thank.php');
 }
-// //destroy for security
-// session_destroy();
+
 
 ?>
 <?php
@@ -50,7 +49,10 @@ function getDone($type){
 ?>
 
 <?php
-if(filter_has_var(INPUT_POST,'submit')){
+// if(filter_has_var(INPUT_POST,'submit')){
+//   header('Location: ordersinfo.php');
+// }
+if(isset($_POST['refresh'])){
   header('Location: ordersinfo.php');
 }
 ?>
@@ -205,16 +207,20 @@ if(filter_has_var(INPUT_POST,'submit')){
   </div>
 
 <form action="<?php echo $_SERVER['PHP_SELF'];?>" method="post">
-  <button type="submit" class="btn btn-primary btn-lg btn-block">Refresh</button>
-  <button type="button" name="logout" class="btn btn-primary btn-lg btn-block">Logout</button>
+  <button type="submit" name="refresh" class="btn btn-primary btn-lg btn-block">Refresh</button>
+  <button type="button" id="logout" class="btn btn-primary btn-lg btn-block">Logout</button>
 </form>
 </div>
 <script type="text/javascript">
   $('.deliver').click((e)=>{
 
     if(confirm('are you sure?')){
-      e.currentTarget.parentElement.parentElement.style.display = "none";
+      // e.currentTarget.parentElement.parentElement.style.display = "none";
+      // var itemDelivered = e.currentTarget.parentElement.parentElement.cloneNode(true);
+      //itemDelivered.style.display = 'block';
+      //$('#delivered').find('table').prepend(e.currentTarget.parentElement.parentElement);
       var id = e.currentTarget.id;
+      e.currentTarget.parentElement.parentElement.remove();
       var params = "id="+id;
       var xhr = new XMLHttpRequest();
       xhr.open("POST","process.php",true);
@@ -226,6 +232,18 @@ if(filter_has_var(INPUT_POST,'submit')){
       };
       xhr.send(params);
     }
+  });
+  $('#logout').click(()=>{
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST","logout.php",true);
+    xhr.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+    xhr.onload = function(){
+      if(this.status == 200){
+        console.log(this.responseText);
+      }
+    };
+    xhr.send();
+    $(location).attr('href', '../login.php')
   });
 </script>
 
