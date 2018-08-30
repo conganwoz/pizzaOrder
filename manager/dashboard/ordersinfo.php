@@ -21,14 +21,19 @@ if(mysqli_connect_errno()){
 <?php
 //make query
 $query = 'SELECT * FROM orders';
+$query1 = 'SELECT * FROM product';
 //get result
 $result = mysqli_query($conn,$query);
+$result1 = mysqli_query($conn,$query1);
 //fetch data
 $orders = mysqli_fetch_all($result,MYSQLI_ASSOC);
 $reverseOrders = array_reverse($orders);
 // var_dump($posts);
 // free memory
 mysqli_free_result($result);
+$products = mysqli_fetch_all($result1,MYSQLI_ASSOC);
+//free memory
+mysqli_free_result($result1);
 //close connection
 mysqli_close($conn);
 function getTypeOrder($type){
@@ -72,6 +77,9 @@ if(isset($_POST['refresh'])){
     </li>
     <li class="nav-item">
       <a class="nav-link" data-toggle="tab" href="#Undelivered">UnDelivered</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" data-toggle="tab" href="#manageProduct">Manage Product</a>
     </li>
   </ul>
   <div id="myTabContent" class="tab-content">
@@ -204,6 +212,45 @@ if(isset($_POST['refresh'])){
   </tbody>
 </table>
     </div>
+
+    <div class="tab-pane fade" id="manageProduct">
+
+
+
+      <table class="table table-hover">
+  <thead>
+    <tr class="table-warning">
+      <th scope="col">ID</th>
+      <th scope="col">name</th>
+      <th scope="col">origin</th>
+      <th scope="col">img</th>
+      <th scope="col">chef</th>
+      <th scope="col">descible</th>
+      <th scope="col">Change Status</th>
+    </tr>
+  </thead>
+  <tbody>
+
+
+
+    <?php foreach($products as $product):?>
+
+      <tr class="table-success">
+        <th scope="row"><?php echo $product['id'];?></th>
+        <td><?php echo $product['name'];?></td>
+        <td><?php echo $product['origin'];?></td>
+        <td><?php echo $product['img'];?></td>
+        <td><?php echo $product['chef'];?></td>
+        <td><?php echo $product['describle'];?></td>
+        <td><button id="<?php echo "p".$product['id'];?>" type="button" class="btn btn-primary propizza">Change info</button></td>
+      </tr>
+
+    <?php endforeach;?>
+
+  </tbody>
+</table>
+ <button type="button" id="addProd" class="btn btn-primary">add Pizza</button>
+    </div>
   </div>
 
 <form action="<?php echo $_SERVER['PHP_SELF'];?>" method="post">
@@ -243,7 +290,23 @@ if(isset($_POST['refresh'])){
       }
     };
     xhr.send();
-    $(location).attr('href', '../login.php')
+    $(location).attr('href', '../login.php');
+  });
+
+
+  $(".propizza").click((e)=>{
+
+
+
+    if(confirm('are you sure?')){
+      var idProduct = e.currentTarget.id.split("")[1];
+      var params = "id="+idProduct;
+      $(location).attr('href', `processPro.php?${params}`);
+    }
+
+  });
+  $('#addProd').click(()=>{
+    $(location).attr('href', 'addPro.php');
   });
 </script>
 
