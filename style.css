@@ -28,6 +28,7 @@ img {
 .slide {
   display: grid;
   grid-template-columns: 1fr;
+  padding: 0;
 }
 .slideImg {
   margin-top: 10px;
@@ -38,7 +39,7 @@ img {
 .slideImg img{
   position: absolute;
   z-index: -1;
-  top:0
+  top:0;
   margin: 0;
 }
 
