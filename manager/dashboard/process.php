@@ -2,7 +2,7 @@
 echo "processing..........";
 
 //connect with database
-$conn = mysqli_connect("localhost","root","123456","pizzaprod");
+$conn = mysqli_connect('sql7.freemysqlhosting.net','sql7292489','n8UWR1v9YX','sql7292489');
 
 // check if post value is set
 if(isset($_POST['id'])){
