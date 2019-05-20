@@ -11,7 +11,7 @@ if(empty($name)||empty($password)){
 <?php
 
 //create connect
-$conn = mysqli_connect('localhost','root','123456','pizzaprod');
+$conn = mysqli_connect('sql7.freemysqlhosting.net','sql7292489','n8UWR1v9YX','sql7292489');
 //check connect
 if(mysqli_connect_errno()){
   echo 'Failed to conect to MySql '.mysqli_connect_errno();
